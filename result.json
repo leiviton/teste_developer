@@ -1,0 +1,40 @@
+{
+  "data": {
+    "id": 6,
+    "nome": "Leiviton Carlos da Silva",
+    "idade": 29,
+    "habilitacao": "D",
+    "tipo": "EXPERIENTE",
+    "created_at": {
+      "date": "2018-04-17 00:20:04.000000",
+      "timezone_type": 3,
+      "timezone": "America/Sao_Paulo"
+    },
+    "updated_at": {
+      "date": "2018-04-17 00:20:04.000000",
+      "timezone_type": 3,
+      "timezone": "America/Sao_Paulo"
+    },
+    "vehicle": {
+      "data": {
+        "id": 6,
+        "chassi": "12151d1sdfsd516",
+        "renavam": "121315466",
+        "marca": "Fiat",
+        "modelo": "uno",
+        "placa": "AAA-1111",
+        "cor": "BRANCO",
+        "created_at": {
+          "date": "2018-04-17 00:20:04.000000",
+          "timezone_type": 3,
+          "timezone": "America/Sao_Paulo"
+        },
+        "updated_at": {
+          "date": "2018-04-17 00:20:04.000000",
+          "timezone_type": 3,
+          "timezone": "America/Sao_Paulo"
+        }
+      }
+    }
+  }
+}
