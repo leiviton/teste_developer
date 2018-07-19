@@ -30,11 +30,11 @@ class SessionTransformer extends TransformerAbstract
 
     public function includeRoom(Session $model)
     {
-            return $this->item($model->room, new RoomTransformer());
+            return $this->item($model->room, new SecretFriendParticipantTransformer());
     }
 
     public function includeMovie(Session $model)
     {
-            return $this->item($model->movie, new MovieTransformer());
+            return $this->item($model->movie, new ParticipantTransformer());
     }
 }

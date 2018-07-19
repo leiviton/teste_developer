@@ -16,7 +16,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
 
     Route::group(['prefix' => 'admin','namespace'=>'Api\V1\Admin'],function (){
         /*bookings*/
-       Route::post('bookings','BookingsController@store');
+       Route::post('bookings','SecretFriendsController@store');
        Route::get('sessions/{id}','SessionsController@edit');
     });
     Route::get('user','Api\UserController@authenticated');

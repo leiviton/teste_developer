@@ -18,11 +18,11 @@ class Session extends Model implements Transformable
 
     public function room()
     {
-        return $this->belongsTo(Room::class);
+        return $this->belongsTo(SecretFriendParticipant::class);
     }
 
     public function movie()
     {
-        return $this->belongsTo(Movie::class);
+        return $this->belongsTo(Participant::class);
     }
 }

@@ -14,7 +14,6 @@ class UserService
 
     public function __construct(UserRepository $repository)
     {
-
         $this->repository = $repository;
     }
 
@@ -28,10 +27,6 @@ class UserService
 
             $user = $this->repository->create($data);
 
-            foreach ($data['roles'] as $d)
-            {
-                $user->assignRole($d['name']);
-            }
             \DB::commit();
 
             return $user;
@@ -57,8 +52,6 @@ class UserService
             }
 
             $user = $this->repository->update($data,$id);
-
-            $user->assignRole($data['roles']);
 
             \DB::commit();
 

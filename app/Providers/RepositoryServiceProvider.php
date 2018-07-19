@@ -24,24 +24,24 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'TestDeveloper\Repositories\BookingRepository',
-            'TestDeveloper\Repositories\BookingRepositoryEloquent'
+            'TestDeveloper\Repositories\SecretFriendRepository',
+            'TestDeveloper\Repositories\SecretFriendRepositoryEloquent'
         );
         $this->app->bind(
-            'TestDeveloper\Repositories\MovieRepository',
-            'TestDeveloper\Repositories\MovieRepositoryEloquent'
+            'TestDeveloper\Repositories\ParticipantRepository',
+            'TestDeveloper\Repositories\ParticipantRepositoryEloquent'
         );
         $this->app->bind(
             'TestDeveloper\Repositories\SessionRepository',
             'TestDeveloper\Repositories\SessionRepositoryEloquent'
         );
         $this->app->bind(
-            'TestDeveloper\Repositories\SeatRepository',
-            'TestDeveloper\Repositories\SeatRepositoryEloquent'
+            'TestDeveloper\Repositories\WishlistRepository',
+            'TestDeveloper\Repositories\WishlistRepositoryEloquent'
         );
         $this->app->bind(
-            'TestDeveloper\Repositories\RoomRepository',
-            'TestDeveloper\Repositories\RoomRepositoryEloquent'
+            'TestDeveloper\Repositories\SecretFriendParticipantRepository',
+            'TestDeveloper\Repositories\SecretFriendParticipantRepositoryEloquent'
         );
         $this->app->bind(
             'TestDeveloper\Repositories\UserRepository',
