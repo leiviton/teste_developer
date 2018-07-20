@@ -2,17 +2,17 @@
 
 namespace TestDeveloper\Services;
 
-use TestDeveloper\Repositories\SecretFriendRepository;
+use TestDeveloper\Repositories\SecretFriendParticipantRepository;
 
-class SecretFriendService
+class SecretFriendParticipantService
 {
 
     /**
-     * @var SecretFriendRepository
+     * @var SecretFriendParticipantRepository
      */
     private $repository;
 
-    public function __construct(SecretFriendRepository $repository)
+    public function __construct(SecretFriendParticipantRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -35,7 +35,8 @@ class SecretFriendService
         }
     }
 
-    public function create(array $data){
+    public function create(array $data)
+    {
         \DB::beginTransaction();
 
         try {
@@ -51,6 +52,7 @@ class SecretFriendService
     public function delete($id)
     {
         \DB::beginTransaction();
+
         try {
             $result = $this->repository->delete($id);
             \DB::commit();

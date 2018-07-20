@@ -2,17 +2,17 @@
 
 namespace TestDeveloper\Services;
 
-use TestDeveloper\Repositories\SecretFriendRepository;
+use TestDeveloper\Repositories\WishlistRepository;
 
-class SecretFriendService
+class WishlistService
 {
 
     /**
-     * @var SecretFriendRepository
+     * @var WishlistRepository
      */
     private $repository;
 
-    public function __construct(SecretFriendRepository $repository)
+    public function __construct(WishlistRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -22,17 +22,8 @@ class SecretFriendService
         return $this->repository->skipPresenter(false)->paginate();
     }
 
-    public function update(array $data,$id)
-    {
-        \DB::beginTransaction();
-
-        try{
-            $result = $this->repository->update($data, $id);
-            \DB::commit();
-            return $result;
-        } catch (\Exception $e){
-            throw $e;
-        }
+    public function update(array $data,$id){
+        return $this->repository->update($data, $id);
     }
 
     public function create(array $data){

@@ -29,11 +29,7 @@ class UserController extends Controller
     public function index()
     {
         $role = 'admin';
-        return $this->userRepository->skipPresenter(false)
-            ->scopeQuery(function($query) use($role){
-                return $query->where('role','<>',$role)->where('role','<>','client');
-            })
-            ->all();
+        return $this->userRepository->skipPresenter(false)->all();
     }
 
     public function store(Request $request)

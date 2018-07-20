@@ -10,10 +10,13 @@ class SecretFriend extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected  $table = 'secret_friends';
+
     protected $fillable = [
         'title',
         'realization_date',
-        'minimum_value'
+        'minimum_value',
+        'user_id'
     ];
 
     public function secretFriendParticipant()
@@ -21,8 +24,7 @@ class SecretFriend extends Model implements Transformable
         return $this->hasMany(SecretFriendParticipant::class);
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function user(){
+        return $this->hasOne(User::class,'id','user_id');
     }
 }
