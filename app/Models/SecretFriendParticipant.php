@@ -10,6 +10,7 @@ class SecretFriendParticipant extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $table = 'secret_friend_participants';
     protected $fillable = [
         'secret_friend_id',
         'participant_id'

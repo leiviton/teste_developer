@@ -47,4 +47,9 @@ class User extends Model implements Transformable,AuthenticatableContract,
         protected $hidden = [
             'password', 'remember_token',
         ];
+
+    public function participant()
+    {
+        return $this->hasOne(Participant::class);
+    }
 }

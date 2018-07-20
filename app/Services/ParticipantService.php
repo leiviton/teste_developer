@@ -2,17 +2,17 @@
 
 namespace TestDeveloper\Services;
 
-use TestDeveloper\Repositories\SecretFriendRepository;
+use TestDeveloper\Repositories\ParticipantRepository;
 
-class SecretFriendService
+class ParticipantService
 {
 
     /**
-     * @var SecretFriendRepository
+     * @var ParticipantRepository
      */
     private $repository;
 
-    public function __construct(SecretFriendRepository $repository)
+    public function __construct(ParticipantRepository $repository)
     {
         $this->repository = $repository;
     }

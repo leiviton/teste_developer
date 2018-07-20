@@ -4,23 +4,23 @@ namespace TestDeveloper\Http\Controllers\Api\V1\Admin;
 
 use TestDeveloper\Http\Controllers\Controller;
 use TestDeveloper\Http\Requests\AdminRequest;
-use TestDeveloper\Http\Requests\SecretFriendRequest;
-use TestDeveloper\Repositories\SecretFriendRepository;
-use TestDeveloper\Services\SecretFriendService;
+use TestDeveloper\Http\Requests\Request;
+use TestDeveloper\Repositories\ParticipantRepository;
+use TestDeveloper\Services\ParticipantService;
 
-class SecretFriendsController extends Controller
+class ParticipantsController extends Controller
 {
 
     /**
-     * @var SecretFriendRepository
+     * @var ParticipantRepository
      */
     private $repository;
     /**
-     * @var SecretFriendService
+     * @var ParticipantService
      */
     private $service;
 
-    public function  __construct(SecretFriendRepository $repository, SecretFriendService $service)
+    public function  __construct(ParticipantRepository $repository, ParticipantService $service)
     {
         $this->repository = $repository;
         $this->service = $service;
@@ -39,15 +39,16 @@ class SecretFriendsController extends Controller
 
     public function store(AdminRequest $request)
     {
-        $user = \Auth::guard('api')->user();
         $data = $request->all();
-        $data['id'] = $user->id;
+
         $o = $this->service->create($data);
         
-        return $this->repository->skipPresenter(false)->find($o->id);
+        return $this->repository
+            ->skipPresenter(false)
+            ->find($o->id);
     }
 
-    public function update($id, SecretFriendRequest $request)
+    public function update($id, Request $request)
     {
         $data = $request->all();
 
