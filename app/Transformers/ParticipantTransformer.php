@@ -20,7 +20,8 @@ class ParticipantTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
             'name' => (string) $model->name,
             'genre' => (string) $model->genre,
-            'age' => (string) $model->age,
+            'age' => (int) $model->age,
+            'email' => (string) $model->email,
             /* place your other model properties here */
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
@@ -29,6 +30,11 @@ class ParticipantTransformer extends TransformerAbstract
 
     public function includeUser(Participant $model)
     {
-        return $this->item($model->user, new UserTransformer());
+        if($model->user) {
+            return $this->item($model->user, new UserTransformer());
+        }else{
+            return null;
+        }
+
     }
 }

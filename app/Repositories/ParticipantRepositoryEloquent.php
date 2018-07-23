@@ -9,6 +9,7 @@ use TestDeveloper\Models\Participant;
 class ParticipantRepositoryEloquent extends BaseRepository implements ParticipantRepository
 {
     protected $skipPresenter = true;
+
     /**
      * Specify Model class name
      *
@@ -30,4 +31,10 @@ class ParticipantRepositoryEloquent extends BaseRepository implements Participan
     {
         return \TestDeveloper\Presenters\ParticipantPresenter::class;
     }
+
+    public function getWhere($id)
+    {
+        return $this->model->where('user_id',$id)->paginate();
+    }
+
 }

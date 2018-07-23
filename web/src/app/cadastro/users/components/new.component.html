@@ -1,0 +1,51 @@
+<div tabindex="-1" class="modal fade" id="infoModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header cadastro">
+                <h6 class="modal-title">Cadastrar novo usuário</h6>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="name">Nome: <span class="text-danger">*</span></label>
+                        <div class="col-md-10">
+                            <input type="text" id="name" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nome usuário" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="email">Email:</label>
+                        <div class="col-md-10">
+                            <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Perfil:</label>
+                        <div class="col-md-10">
+
+                        <p-autoComplete [(ngModel)]="countries" [suggestions]="filteredCountriesMultiple" (completeMethod)="filterCountryMultiple($event)" styleClass="wid100"
+                                        [minLength]="1" placeholder="perfis" field="name" [multiple]="true" [ngModelOptions]="{standalone: true}">
+                        </p-autoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="password">Senha:</label>
+                        <div class="col-md-4">
+                            <input type="password" id="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Nova senha">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer cadastro">
+                <div class="modal-button">
+                    <button class="btn btn-danger" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-success" type="button" (click)="save(user)"><i class="fa fa-arrow-circle-right"></i> Salvar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

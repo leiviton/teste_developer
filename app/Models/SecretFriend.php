@@ -19,7 +19,7 @@ class SecretFriend extends Model implements Transformable
         'user_id'
     ];
 
-    public function secretFriendParticipant()
+    public function participants()
     {
         return $this->hasMany(SecretFriendParticipant::class);
     }

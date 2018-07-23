@@ -8,7 +8,7 @@ use TestDeveloper\Models\SecretFriend;
 class SecretFriendTransformer extends TransformerAbstract
 {
 
-    protected $defaultIncludes = [];
+    protected $defaultIncludes = ['participants'];
     /**
      * Transform the Driver entity
      * @param TestDeveloper\Models\SecretFriend $model
@@ -26,5 +26,10 @@ class SecretFriendTransformer extends TransformerAbstract
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];
+    }
+
+    public function includeParticipants(SecretFriend $model)
+    {
+        return $this->collection($model->participants, new SecretFriendParticipantTransformer());
     }
 }

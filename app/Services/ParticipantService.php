@@ -17,9 +17,9 @@ class ParticipantService
         $this->repository = $repository;
     }
 
-    public function get()
+    public function get($id)
     {
-        return $this->repository->skipPresenter(false)->paginate();
+        return $this->repository->skipPresenter(false)->allParticipant($id);
     }
 
     public function update(array $data,$id)

@@ -13,11 +13,12 @@
 Auth::routes();
 
 Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
-
+    Route::get('user','Api\UserController@authenticated');
     Route::group(['prefix' => 'admin','namespace'=>'Api\V1\Admin'],function (){
         /*Secret*/
        Route::post('secret/friend','SecretFriendsController@store');
        Route::get('secret/friend','SecretFriendsController@index');
+       Route::get('secret/send/{id}','SecretFriendsController@lottery');
        Route::get('secret/friend/{id}','SecretFriendsController@edit');
        Route::put('secret/friend/{id}','SecretFriendsController@update');
        Route::delete('secret/friend/{id}','SecretFriendsController@delete');
@@ -50,7 +51,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         Route::put('user/{id}','UserController@update');
         Route::delete('user/{id}','UserController@delete');
     });
-    Route::get('user','Api\UserController@authenticated');
+
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
