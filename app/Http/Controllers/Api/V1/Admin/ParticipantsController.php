@@ -28,7 +28,11 @@ class ParticipantsController extends Controller
 
     public function index()
     {
-        return $this->service->get();
+        $user = \Auth::guard('api')->user();
+
+        return $this->repository->skipPresenter(false)->scopeQuery(function($query) use($user){
+            return $query->where('user_id',$user->id);
+        })->paginate();
     }
 
     public function edit($id)
@@ -39,7 +43,11 @@ class ParticipantsController extends Controller
 
     public function store(AdminRequest $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
+
+        $data['user_id'] = $user->id;
 
         $o = $this->service->create($data);
         
@@ -50,7 +58,11 @@ class ParticipantsController extends Controller
 
     public function update($id, Request $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
+
+        $data['user_id'] = $user->id;
 
         $result = $this->service->update($data,$id);
 

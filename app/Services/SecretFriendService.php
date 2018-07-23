@@ -27,6 +27,7 @@ class SecretFriendService
         \DB::beginTransaction();
 
         try{
+
             $result = $this->repository->update($data, $id);
             \DB::commit();
             return $result;
@@ -39,7 +40,13 @@ class SecretFriendService
         \DB::beginTransaction();
 
         try {
+            $participants = $data['participants'];
+
             $result = $this->repository->create($data);
+
+            foreach ($participants as $item){
+                $result->participants()->create($item);
+            }
             \DB::commit();
             return $result;
         } catch (\Exception $e){

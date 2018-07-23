@@ -15,9 +15,6 @@ class CreateSecretFriendParticipantsTable extends Migration
 	{
 		Schema::create('secret_friend_participants', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('cinema');
-            $table->string('address');
-            $table->time('time_session');
             $table ->integer('secret_friend_id')->unsigned();
             $table->foreign('secret_friend_id')->references('id')->on('secret_friends');
 

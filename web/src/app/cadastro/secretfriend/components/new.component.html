@@ -1,0 +1,108 @@
+<div tabindex="-1" class="modal fade" id="new_secret_friend" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header cadastro">
+                <h6 class="modal-title">Cadastrar novo Amigo secreto</h6>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #myForm="ngForm">
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label control-label" for="razao">Titulo<span class="text-danger">*</span></label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control"
+                                   [ngClass]="{'is-invalid': razao.invalid && (razao.dirty || razao.touched)}"
+                                   id="razao" name="razao" [(ngModel)]="secritfriend.title"
+                                   placeholder="Titulo" #razao="ngModel" minlength="5" required />
+
+                            <div class="invalid-feedback" *ngIf="razao.errors">
+                                <span *ngIf="razao.errors.required">Titulo é obrigatório.</span>
+                                <span *ngIf="razao.errors.minlength">Titulo deve ser maior que 4 caractares.</span>
+                            </div>
+                        </div>
+                        <label class="col-md-1 col-form-label control-label" for="razao">Data</label>
+                        <div class="col-md-5">
+                            <input type="date" class="form-control"
+                                   [ngClass]="{'is-invalid': fantazy.invalid && (fantazy.dirty || fantazy.touched)}"
+                                   id="fantazy" name="fantazy" [(ngModel)]="secritfriend.realization_date"
+                                   placeholder="Data" #fantazy="ngModel" required="required" />
+
+                            <div class="invalid-feedback" *ngIf="fantazy.errors">
+                                <span *ngIf="fantazy.errors.required">Data é obrigatório.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="cnpj">Valor minimo<span class="text-danger">*</span></label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" [ngClass]="{'is-invalid': cnpj.invalid && (cnpj.dirty || cnpj.touched)}"
+                                   id="cnpj" name="cnpj" [(ngModel)]="secritfriend.minimum_value" #cnpj="ngModel"
+                                         placeholder="Valor minimo"  required>
+
+                            <div class="invalid-feedback" *ngIf="cnpj.errors">
+                                <span *ngIf="cnpj.errors.required">Valor minimo é obrigatório.</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-md-12 padding">
+                    <div class="table-responsive" style="height: 190px; overflow: auto">
+                        <table class="table scrollbox table-striped">
+                            <thead>
+                            <tr class="th-table title-table">
+                                <th class="text-center">#</th>
+                                <th>Name</th>
+                                <th class="text-center">Email</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="th-table" *ngFor="let p of secritfriend.participants; let i = index">
+                                <td class="text-center">{{ p.id }}</td>
+                                <td>{{ p.name }}</td>
+                                <td class="text-center">{{ p.email }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            <div class="modal-footer cadastro">
+                <div class="modal-button">
+                    <button class="btn btn-danger" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-info" type="button" (click)="save(secritfriend)" [disabled]="!myForm.valid || secritfriend.participants.length == 0"><i class="fa fa-save"></i> Salvar</button>
+                    <button class="btn btn-success" type="button" (click)="showParticipant()" [disabled]="!myForm.valid"><i class="fa fa-arrow-circle-right"></i>Adicionar Participante</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div tabindex="-1" class="modal fade" id="participant" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-success modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header cadastro">
+                <h6 class="modal-title">Adicionar Participantes</h6>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="closeParticipant()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body text-center" style="height: 250px; overflow: auto">
+                    <div class="checkbox" *ngFor="let p of result.data">
+                        <label>
+                            <p class="text-left" (click)="addParticipant(p)"> {{ p.name }} - {{ p.email }}</p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer cadastro">
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

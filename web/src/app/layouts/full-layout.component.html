@@ -1,0 +1,61 @@
+<header class="app-header navbar" *ngIf="user !== '' && user !== null" [ngClass]="{'fundo': !user || user == '' || user == null}">
+  <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
+  <a class="navbar-brand logo"></a>
+  <button class="navbar-toggler d-md-down-none" type="button" appSidebarToggler>&#9776;</button>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">
+      <a href class="nav-link dropdown-toggle" dropdownToggle (click)="false">
+        <img src="../../assets/img/logo_eguis.png" class="img-avatar" alt="{{ user.email }}">
+        <span class="d-md-down-none"></span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+
+        <div class="dropdown-header text-center"><i class="fa fa-user"></i> <strong>{{ user.name }}</strong></div>
+        <a class="dropdown-item" [routerLink]="['/dashboard/password']"><i class="fa fa-bell-o"></i> Trocar senha</a>
+        <a class="dropdown-item" [routerLink]="['/user/logout']"><i class="fa fa-power-off"></i> Sair</a>
+      </div>
+    </li>
+  </ul>
+</header>
+
+<header class="app-header navbar" *ngIf="user == '' && user == null || !user" [ngClass]="{'fundo': !user || user == '' || user == null}">
+</header>
+
+<div class="app-body" [ngClass]="{'fundo': !user || user == '' || user == null}">
+  <div class="sidebar" *ngIf="user !== '' && user !== null">
+    <nav class="sidebar-nav">
+      <ul class="nav">
+        <li class="divider"></li>
+        <li class="nav-title">
+
+        </li>
+        <li class="nav-item nav-dropdown" appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-product-hunt"></i> Amigo Secreto</a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/cadastro/secretfriend']"><i class="fa fa-plus"></i> Gerenciar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/cadastro/participant']"><i class="fa fa-user-secret"></i> Participantes</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <main class="main">
+    <div class="container-fluid" style="padding: 15px">
+      <router-outlet></router-outlet>
+    </div><!-- /.conainer-fluid -->
+  </main>
+</div>
+
+<footer class="app-footer" *ngIf="user !== '' && user !== null">
+  <span class="float-center">Versão: 1.02.28.18 | {{data}}</span>
+  <span class="float-right">
+    <a href="http://leiviton.com.br">Secret Friends</a> &copy; {{ ano }} | Powered by
+    <a href="http://leiviton.com.br">Leiviton Software</a>
+  </span>
+</footer>
