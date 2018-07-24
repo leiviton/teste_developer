@@ -278,6 +278,10 @@ var SecretfriendComponent = (function () {
     SecretfriendComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        var cart = this.httpService.get();
+        if (!cart) {
+            this.httpService.initCart();
+        }
         this.httpService.setAccessToken();
         this.httpService.eventEmitter
             .subscribe(function () {

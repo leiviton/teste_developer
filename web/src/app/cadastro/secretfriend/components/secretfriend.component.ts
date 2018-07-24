@@ -27,6 +27,11 @@ export class SecretfriendComponent implements OnInit {
 
   ngOnInit(): void {
       this.showLoading();
+      let cart = this.httpService.get();
+      if(!cart)
+      {
+          this.httpService.initCart();
+      }
       this.httpService.setAccessToken();
       this.httpService.eventEmitter
           .subscribe(() => {
