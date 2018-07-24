@@ -17,14 +17,10 @@ export class LogoutComponent implements OnInit {
 
     ngOnInit(){
         this.showLoading();
-        this.authService.builder()
-            .logout()
-            .then(() => {
                 localStorage.removeItem('token');
                 localStorage.setItem('user','');
                 this.hideLoading();
                 this.router.navigate(['/user/login']);
-            })
     }
 
     hideLoading(){

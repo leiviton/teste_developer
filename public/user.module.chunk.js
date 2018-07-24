@@ -29,16 +29,11 @@ var LogoutComponent = (function () {
         this.authService = authService;
     }
     LogoutComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.showLoading();
-        this.authService.builder()
-            .logout()
-            .then(function () {
-            localStorage.removeItem('token');
-            localStorage.setItem('user', '');
-            _this.hideLoading();
-            _this.router.navigate(['/user/login']);
-        });
+        localStorage.removeItem('token');
+        localStorage.setItem('user', '');
+        this.hideLoading();
+        this.router.navigate(['/user/login']);
     };
     LogoutComponent.prototype.hideLoading = function () {
         __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").hide();
