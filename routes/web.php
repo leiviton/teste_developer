@@ -12,6 +12,11 @@
 */
 Auth::routes();
 
+Route::get('/', function () {
+    return view('secret');
+});
+
+
 Route::post('registry','Api\V1\Admin\UserController@store');
 
 Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
