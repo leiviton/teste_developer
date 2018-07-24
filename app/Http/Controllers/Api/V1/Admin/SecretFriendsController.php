@@ -69,7 +69,7 @@ class SecretFriendsController extends Controller
     {
         $user = \Auth::guard('api')->user();
         $data = $request->all();
-        $data['id_user'] = $user->id;
+        $data['user_id'] = $user->id;
         $o = $this->service->create($data);
         
         return $this->repository->skipPresenter(false)->find($o->id);
