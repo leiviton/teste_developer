@@ -12,6 +12,8 @@
 */
 Auth::routes();
 
+Route::post('registry','Api\V1\Admin\UserController@store');
+
 Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
     Route::get('user','Api\UserController@authenticated');
     Route::group(['prefix' => 'admin','namespace'=>'Api\V1\Admin'],function (){
@@ -22,7 +24,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('secret/friend/{id}','SecretFriendsController@edit');
        Route::put('secret/friend/{id}','SecretFriendsController@update');
        Route::delete('secret/friend/{id}','SecretFriendsController@delete');
-
+       Route::get('secret/lottery/{id}','SecretFriendsController@lottery');
         /*Participant*/
         Route::post('participant','ParticipantsController@store');
         Route::get('participant','ParticipantsController@index');
@@ -51,7 +53,6 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         Route::put('user/{id}','UserController@update');
         Route::delete('user/{id}','UserController@delete');
     });
-
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

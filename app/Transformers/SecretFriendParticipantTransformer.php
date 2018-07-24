@@ -8,7 +8,6 @@ use TestDeveloper\Models\SecretFriendParticipant;
 class SecretFriendParticipantTransformer extends TransformerAbstract
 {
 
-    protected $defaultIncludes = ['participant'];
     /**
      * Transform the Driver entity
      * @param TestDeveloper\Models\Room $model
@@ -25,8 +24,8 @@ class SecretFriendParticipantTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeParticipant(SecretFriendParticipant $model)
+    public function includeParticipants(SecretFriendParticipant $model)
     {
-        return $this->item($model->participant, new ParticipantTransformer());
+        return $this->item($model->participants, new ParticipantTransformer());
     }
 }

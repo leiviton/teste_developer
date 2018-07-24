@@ -17,6 +17,10 @@ export class LoginComponent {
     constructor(private AuthService: AuthService, private router: Router) {
         localStorage.setItem('user','');
     }
+    registry()
+    {
+        this.router.navigate(['user/registry']);
+    }
 
     login(e) {
         e.preventDefault();

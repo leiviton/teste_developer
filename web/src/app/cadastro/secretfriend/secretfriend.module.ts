@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap';
 
 import { SecretfriendComponent } from './components/secretfriend.component';
 import { NewComponent } from './components/new.component';
@@ -22,7 +23,9 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
     SecretfriendRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+      TooltipModule
+
   ],
   declarations: [ SecretfriendComponent, NewComponent, EditComponent ],
   providers: [ SecretfriendService ]

@@ -10,6 +10,7 @@ import { LoginComponent } from "./components/login.component"
 import { UserRoutingModule } from "./user-routing.module"
 import { AuthService } from './services/auth.service';
 import { LogoutComponent } from './components/logout.component';
+import { RegistryComponent } from "./components/registry.component"
 
 import { LoadingModule } from 'ngx-loading';
 
@@ -24,7 +25,8 @@ import { LoadingModule } from 'ngx-loading';
         PasswordComponent,
         ProfileComponent,
         LogoutComponent,
-        LoginComponent
+        LoginComponent,
+        RegistryComponent
     ],
     providers: [ AuthService ]
 })

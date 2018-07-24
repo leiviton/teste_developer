@@ -9,6 +9,11 @@ use TestDeveloper\Models\SecretFriendParticipant;
 class SecretFriendParticipantRepositoryEloquent extends BaseRepository implements SecretFriendParticipantRepository
 {
     protected $skipPresenter = true;
+
+    public function getRandom($id)
+    {
+        return $this->model->where('secret_friend_id',$id)->orderByRaw('RAND()')->get();
+    }
     /**
      * Specify Model class name
      *

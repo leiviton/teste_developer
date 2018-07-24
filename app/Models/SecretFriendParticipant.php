@@ -18,11 +18,11 @@ class SecretFriendParticipant extends Model implements Transformable
 
     public function secretFriend()
     {
-        return $this->belongsTo(SecretFriend::class,'secret_friend_id','id');
+        return $this->belongsTo(SecretFriend::class);
     }
 
     public function participant()
     {
-        return $this->belongsTo(Participant::class,'participant_id','id');
+        return $this->belongsTo(Participant::class);
     }
 }
