@@ -34,24 +34,10 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $user = \Auth::guard('api')->user();
-
         $data = $request->all();
 
         $result = $this->service->create($data);
 
-        if($result->id)
-        {
-            $audit = [
-                'type'=>'insert',
-                'user_id'=>$user->id,
-                'user' => $user->email,
-                'entity' => 'user',
-                'action' => 'criou o usuario: '.$result->name
-            ];
-
-            $this->auditRepository->create($audit);
-        }
         return $this->userRepository->skipPresenter(false)->find($result->id);
     }
 
@@ -67,19 +53,6 @@ class UserController extends Controller
         $data = $request->all();
 
         $result = $this->service->update($data,$id);
-
-        if($result->id)
-        {
-            $audit = [
-                'type'=>'update',
-                'user_id'=>$user->id,
-                'user' => $user->email,
-                'entity' => 'user',
-                'action' => 'Atualizou o usuario: '.$result->name
-            ];
-
-            $this->auditRepository->create($audit);
-        }
 
         return $this->userRepository->skipPresenter(false)->find($result->id);
     }
@@ -100,8 +73,6 @@ class UserController extends Controller
 
     public function changePassword($id,Request $request)
     {
-        $u = \Auth::guard('api')->user();
-
         $rules = [
             'password' => 'required|min:6',
             'password_confirmation' => 'same:password'
@@ -112,18 +83,6 @@ class UserController extends Controller
             ->first();
 
         $user = $this->userRepository->update(['password' => bcrypt($request->get('password'))],$id);
-        if($user->id)
-        {
-            $audit = [
-                'type'=>'update',
-                'user_id'=>$user->id,
-                'user' => $u->email,
-                'entity' => 'user',
-                'action' => 'trocou a senha do usuario: '.$user->name
-            ];
-
-            $this->auditRepository->create($audit);
-        }
 
         return $this->userRepository->skipPresenter(false)->find($user->id);
     }

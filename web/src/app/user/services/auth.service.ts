@@ -43,6 +43,15 @@ export class AuthService extends AppHttpService {
         });
     }
 
+    registry(data) {
+        let observable = this.http.post(environment.server_url + '/registry',data);
+        return this.toPromise(observable).then((res) => {
+            this.eventEmitter.emit();
+            return res;
+        });
+    }
+
+
     logout() {
         let observable = this.http.get(this.url + 'logout',{headers: this.header});
         return this.toPromise(observable).then((res) => {

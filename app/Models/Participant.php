@@ -19,6 +19,6 @@ class Participant extends Model implements Transformable
     ];
 
     public function user(){
-        return $this->hasOne(User::class,'id','user_id');
+        return $this->hasOne(User::class);
     }
 }

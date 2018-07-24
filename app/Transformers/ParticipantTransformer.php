@@ -7,13 +7,13 @@ use TestDeveloper\Models\Participant;
 
 class ParticipantTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['user'];
     /**
      * Transform the Driver entity
      * @param TestDeveloper\Models\Participant $model
      *
      * @return array
      */
+
     public function transform(Participant $model)
     {
         return [

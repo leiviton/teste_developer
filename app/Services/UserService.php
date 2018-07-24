@@ -25,6 +25,10 @@ class UserService
 
             $data['password'] = bcrypt($data['password']);
 
+            $data['remember_token'] = md5(123456);
+
+            $data['role'] = 'admin';
+
             $user = $this->repository->create($data);
 
             \DB::commit();

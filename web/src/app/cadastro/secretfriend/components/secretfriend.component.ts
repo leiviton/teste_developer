@@ -5,7 +5,6 @@ import { NgForOf } from '@angular/common';
 import { SecretfriendService } from '../services/secretfriend.service';
 import { FormsModule } from '@angular/forms';
 
-
 import * as jQuery from 'jquery';
 import {AppMessageService} from "../../../app-message.service";
 @Component({
@@ -47,6 +46,18 @@ export class SecretfriendComponent implements OnInit {
         this.router.navigate(['/cadastro/secretfriend/edit/'+ id]);
     }
 
+    lottery(id)
+    {
+        this.showLoading();
+        this.httpService.builder('admin/')
+            .list({},'secret/lottery/'+id)
+            .then((res) => {
+                this.hideLoading();
+                this.notification.message('Sucesso','Sorteio realizado com sucesso','success');
+            }).cath((res) => {
+                this.notification.message('Erro','Ops não foi possivel realizar o sorteio, tente novamente','error');
+            });
+    }
     showModal()
     {
         jQuery(".modal").show().addClass('show');

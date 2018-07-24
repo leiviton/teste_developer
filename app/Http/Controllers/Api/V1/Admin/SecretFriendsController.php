@@ -8,6 +8,7 @@ use TestDeveloper\Http\Requests\SecretFriendRequest;
 use TestDeveloper\Mail\SendSecretFriend;
 use TestDeveloper\Models\Participant;
 use TestDeveloper\Repositories\ParticipantRepository;
+use TestDeveloper\Repositories\SecretFriendParticipantRepository;
 use TestDeveloper\Repositories\SecretFriendRepository;
 use TestDeveloper\Services\SecretFriendService;
 
@@ -26,17 +27,28 @@ class SecretFriendsController extends Controller
      * @var ParticipantRepository
      */
     private $participantRepository;
+    /**
+     * @var SecretFriendParticipantRepository
+     */
+    private $secretFriendParticipantRepository;
 
-    public function  __construct(SecretFriendRepository $repository, SecretFriendService $service, ParticipantRepository $participantRepository)
+    public function  __construct(SecretFriendRepository $repository, SecretFriendService $service,
+                                 ParticipantRepository $participantRepository,
+                                 SecretFriendParticipantRepository $secretFriendParticipantRepository)
     {
         $this->repository = $repository;
         $this->service = $service;
         $this->participantRepository = $participantRepository;
+        $this->secretFriendParticipantRepository = $secretFriendParticipantRepository;
     }
 
     public function index()
     {
-        return $this->service->get();
+        $user = \Auth::guard('api')->user();
+
+        return $this->repository->skipPresenter(false)->scopeQuery(function($query) use($user){
+            return $query->where('user_id',$user->id);
+        })->paginate();
     }
 
     /**
@@ -57,7 +69,7 @@ class SecretFriendsController extends Controller
     {
         $user = \Auth::guard('api')->user();
         $data = $request->all();
-        $data['id'] = $user->id;
+        $data['id_user'] = $user->id;
         $o = $this->service->create($data);
         
         return $this->repository->skipPresenter(false)->find($o->id);
@@ -97,11 +109,15 @@ class SecretFriendsController extends Controller
     {
         $participants = $this->repository->find($id)->participants;
 
-        foreach ($participants as $participant) {
-            \Mail::to($participant->participant->email)->send(new SendSecretFriend($participant->participant));
+        $rand = $this->secretFriendParticipantRepository->getRandom($id);
+
+        foreach ($participants as $participant){
+            foreach ($rand as $ra){
+               \Mail::to($participant->participant->email)->send(new SendSecretFriend($participant->participant, $ra->participant));
+            }
         }
 
-        return $participants;
+        return $rand;
 
     }
 }

@@ -12,16 +12,20 @@ class SendSecretFriend extends Mailable
     use Queueable, SerializesModels;
 
     public $participant;
+    /**
+     * @var
+     */
+    public $secret;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($participant)
+    public function __construct($participant, $secret)
     {
-
         $this->participant = $participant;
+        $this->secret = $secret;
     }
 
     /**
@@ -32,6 +36,7 @@ class SendSecretFriend extends Mailable
     public function build()
     {
         return $this
-            ->subject('Sua compra foi realizada')->markdown('mail.sendsecretfriend');
+            ->from('leivitoncs@gmail.com','Amigo Secreto ADM')
+            ->subject('Sorteio amigo secreto')->markdown('mail.sendsecretfriend');
     }
 }

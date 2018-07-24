@@ -9,6 +9,7 @@ use TestDeveloper\Models\SecretFriend;
 class SecretFriendRepositoryEloquent extends BaseRepository implements SecretFriendRepository
 {
     protected $skipPresenter = true;
+
     /**
      * Specify Model class name
      *
